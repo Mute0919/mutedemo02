@@ -1,0 +1,29 @@
+package serializer
+
+import "WestOnline2/model"
+
+type Task struct {
+	ID        uint   `json:"id" example:"1"`
+	Title     string `json:"title" example:"吃饭"`
+	Content   string `json:"content" example:"睡觉"`
+	View      uint64 `json:"view" example:"32"`
+	Status    int    `json:"status" example:"0"`
+	CreatedAt int64  `json:"created_at"`
+	StartTime int64  `json:"start_time"`
+	EndTime   int64  `json:"end_time"`
+}
+
+func BuildTask(item model.Task) Task {
+	return Task{
+		ID:      item.ID,
+		Title:   item.Title,
+		EndTime: item.EndTime,
+	}
+}
+func BuildTasks(items []model.Task) (tasks []Task) {
+	for _, item := range items {
+		task := BuildTask(item)
+		tasks = append(tasks, task)
+	}
+	return tasks
+}
